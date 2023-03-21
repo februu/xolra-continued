@@ -1,0 +1,61 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "bez nazwy 2.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "Wszystkie pliki (*)",
+    "fileStates": {
+        "bez nazwy 2.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 835,
+                "y": 814
+            }
+        },
+        "bez nazwy.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 65,
+                "y": 84.66666666666666
+            }
+        },
+        "tiles.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 5.5
+        }
+    },
+    "last.exportedFilePath": "C:/Users/lutom/Desktop/GitHub/sfml crash testy/levels",
+    "last.externalTilesetPath": "C:/Users/lutom/Desktop/GitHub/sfml crash testy/levels",
+    "last.imagePath": "C:/Users/lutom/Desktop/GitHub/sfml crash testy/res/textures",
+    "map.fixedSize": true,
+    "map.height": 100,
+    "map.lastUsedExportFilter": "Pliki csv (*.csv)",
+    "map.lastUsedFormat": "tmx",
+    "map.renderOrder": null,
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 100,
+    "openFiles": [
+        "bez nazwy.tmx",
+        "tiles.tsx",
+        "bez nazwy 2.tmx"
+    ],
+    "project": "bez nazwy.tiled-project",
+    "recentFiles": [
+        "bez nazwy.tmx",
+        "tiles.tsx",
+        "bez nazwy 2.tmx"
+    ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
