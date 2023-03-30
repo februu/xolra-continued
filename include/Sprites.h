@@ -18,12 +18,13 @@ enum SpriteIds
     SPRITE_HOTBAR = 9997,
     SPRITE_HOTBAR_ACTIVE = 9998,
     SPRITE_CURSOR = 9999,
+    SPRITE_LOGO = 9996
 };
 
-// FIXME!
 enum FontIds
 {
-    DEFAULT_FONT = 99999
+    DEFAULT_FONT = 99999,
+    DEFAULT_FONT_BOLD = 99998
 };
 
 const std::map<int, std::string> itemNames = {std::make_pair(SPRITE_ITEM_WOOD, "Wood"),

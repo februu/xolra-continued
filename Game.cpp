@@ -29,12 +29,12 @@ void Game::handleEvents()
     while (window->pollEvent(sfEvent))
     {
         if (sfEvent.type == sf::Event::MouseWheelScrolled)
-            if (sfEvent.mouseWheelScroll.delta > 0) // SCROLL W GORE
+            if (sfEvent.mouseWheelScroll.delta > 0) // SCROLL UP
                 player.getInventory()->setCurrentSlot(player.getInventory()->getCurrentSlot() - 1);
-
-            else if (sfEvent.mouseWheelScroll.delta < 0) // SCROLL W DOL
+            else if (sfEvent.mouseWheelScroll.delta < 0) // SCROLL DOWN
                 player.getInventory()->setCurrentSlot(player.getInventory()->getCurrentSlot() + 1);
 
+        // Handle windows events like closing, moving or alt+tabbing.
         if (sfEvent.type == sf::Event::Closed)
             window->close();
     }
@@ -74,9 +74,17 @@ void Game::run()
 {
     while (window->isOpen())
     {
-        handleEvents();
-        update();
-        draw();
+        if (gameState == 2)
+        {
+            handleEvents();
+            update();
+            draw();
+        }
+        else if (gameState == 0)
+        {
+            handleEvents();
+            drawSplashScreen();
+        }
     }
 }
 
@@ -87,12 +95,43 @@ void Game::createWindow()
     // if (fullscreenMode)
     //  window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), "XXX", sf::Style::Fullscreen);
     // else
-    window = new sf::RenderWindow(sf::VideoMode(INT_SCREEN_WIDTH, INT_SCREEN_HEIGHT), "XXX", sf::Style::Close);
+    window = new sf::RenderWindow(sf::VideoMode(INT_SCREEN_WIDTH, INT_SCREEN_HEIGHT), "Xolra", sf::Style::Close);
     window->setMouseCursorVisible(false);
     window->setFramerateLimit(300);
     // sf::Image icon = sf::Image();
     // icon.loadFromFile("assets/icon.png");
     // window->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+}
+
+// Draws Splash Screen
+void Game::drawSplashScreen()
+{
+    // Skips splashscreen.
+    if (!BOOL_ENABLE_SPLASHSCREEN)
+        gameState = 2;
+
+    // Checks duration.
+    if (timeFromStart > 9)
+    {
+        gameState = 2;
+        return;
+    }
+
+    window->clear(sf::Color(34, 32, 34, 255));
+    if (timeFromStart > 1)
+    {
+        if (timeFromStart < 2)
+            drawText(INT_SCREEN_WIDTH / 2, INT_SCREEN_HEIGHT / 2, "made by @febru", DEFAULT_FONT_BOLD, 32, true, false, sf::Color(255, 255, 255, int(255 * (timeFromStart - 1))));
+        else if (timeFromStart < 3)
+            drawText(INT_SCREEN_WIDTH / 2, INT_SCREEN_HEIGHT / 2, "made by @febru", DEFAULT_FONT_BOLD, 32, true, false, sf::Color(255, 255, 255, 255));
+        else if (timeFromStart < 4)
+            drawText(INT_SCREEN_WIDTH / 2, INT_SCREEN_HEIGHT / 2, "made by @febru", DEFAULT_FONT_BOLD, 32, true, false, sf::Color(255, 255, 255, int(255 - (255 * (timeFromStart - 3)))));
+        if (timeFromStart > 5)
+            drawSprite(INT_SCREEN_WIDTH / 2, INT_SCREEN_HEIGHT / 2, SPRITE_LOGO, 2.f, false, false, true, true);
+    }
+
+    window->display();
+    timeFromStart += clock.restart().asSeconds();
 }
 
 void Game::drawSprite(float x, float y, int id, float scale, bool flipped, bool cameraOffset, bool centeredX, bool centeredY)
@@ -113,21 +152,24 @@ void Game::drawSprite(float x, float y, int id, float scale, bool flipped, bool 
     window->draw(sprite);
 }
 
-void Game::drawText(float x, float y, std::string content, int fontId, float scale, bool centered)
+void Game::drawText(float x, float y, std::string content, int fontId, float scale, bool centered, bool shadow, sf::Color color)
 {
     sf::Text text(content, *am.getFont(fontId));
     text.setCharacterSize(scale);
-    text.setPosition(sf::Vector2f(x + 1.f, y + 1.f));
-    text.setFillColor(sf::Color(0, 0, 0));
     if (centered)
     {
         sf::FloatRect textRect = text.getLocalBounds();
         text.setOrigin(textRect.left + textRect.width / 2.0f,
                        textRect.top);
     }
-    window->draw(text);
-    text.setPosition(sf::Vector2f(x - 1.f, y - 1.f));
-    text.setFillColor(sf::Color(255, 255, 255));
+    if (shadow)
+    {
+        text.setPosition(sf::Vector2f(x + 2.f, y + 2.f));
+        text.setFillColor(sf::Color(0, 0, 0));
+        window->draw(text);
+    }
+    text.setPosition(sf::Vector2f(x, y));
+    text.setFillColor(color);
     window->draw(text);
 }
 
@@ -144,6 +186,11 @@ Camera *Game::getCamera()
 Player *Game::getPlayer()
 {
     return &player;
+}
+
+World *Game::getWorld()
+{
+    return &world;
 }
 
 sf::RenderWindow *Game::getWindow()

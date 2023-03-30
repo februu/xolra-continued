@@ -15,6 +15,9 @@ World::World(Game *game)
 {
     loadMapFromFile();
     this->game = game;
+
+    // FIXME: Just for debugging!!!
+    // FIXME: =====================
     Item item = Item(SPRITE_ITEM_WOOD, 888, sf::Vector2f({600.f, 800.f}));
     items.push_back(item);
     item = Item(SPRITE_ITEM_WOOD, 222, sf::Vector2f({600.f, 900.f}));
@@ -23,6 +26,10 @@ World::World(Game *game)
     items.push_back(item);
     item = Item(SPRITE_ITEM_STONE, 204, sf::Vector2f({640.f, 950.f}));
     items.push_back(item);
+
+    HitBox hitbox = HitBox({200, 200}, {200, 200});
+    hitboxes.push_back(hitbox);
+    // FIXME: =====================
 
     // World Generation.
     // srand((unsigned)time(NULL));
@@ -50,7 +57,7 @@ void World::update(double deltaTime)
 
 void World::draw(double timeFromStart)
 {
-    // Draws map.
+    // Draws map. Variables below make sure only visible tiles are rendered.
     int lowXrange = clampInt(game->getCamera()->getOffset().x / (16 * FLOAT_TILESCALE / 2), 0, INT_WORLDSIZE);
     int maxXrange = clampInt((game->getCamera()->getOffset().x + INT_SCREEN_WIDTH / 2) / (16 * FLOAT_TILESCALE / 2), 0, INT_WORLDSIZE);
     int lowYrange = clampInt(game->getCamera()->getOffset().y / (16 * FLOAT_TILESCALE / 2), 0, INT_WORLDSIZE);
@@ -65,23 +72,29 @@ void World::draw(double timeFromStart)
     for (auto item = begin(items); item != end(items); ++item)
     {
         float distanceFromPlayer = pow(item->getPosition().x - game->getCamera()->getOffset().x - game->getPlayer()->getPosition().x, 2) + pow(item->getPosition().y - game->getCamera()->getOffset().y - game->getPlayer()->getPosition().y, 2);
+
         // Draws text when player is near the item (is closer than 200 pixels (200^2 = 40000)).
         if (distanceFromPlayer < 40000)
         {
             // For optimisation reasons item pickups are done here (I didnt want to make two vector loops - one in update and one in draw)
             if (distanceFromPlayer < 1000)
             {
-                // TODO: Item pickup and item merging.
+                // TODO: Item merging.
                 game->getHud()->addToEventLog("Picked up " + std::to_string(item->getAmount()) + "x " + itemNames.at(item->getSprite()) + ".");
                 game->getPlayer()->getInventory()->addToInventory(item->getAmount(), item->getSprite());
                 items.erase(item--);
                 continue;
             }
             else
-                game->drawText(item->getPosition().x - FLOAT_TILESCALE * game->getCamera()->getOffset().x, item->getPosition().y - FLOAT_TILESCALE * game->getCamera()->getOffset().y - 20, std::to_string(item->getAmount()) + "x " + itemNames.at(item->getSprite()), DEFAULT_FONT, 12, true); // FIXME: Add item name description.
+                game->drawText(item->getPosition().x - FLOAT_TILESCALE * game->getCamera()->getOffset().x, item->getPosition().y - FLOAT_TILESCALE * game->getCamera()->getOffset().y - 20, std::to_string(item->getAmount()) + "x " + itemNames.at(item->getSprite()), DEFAULT_FONT_BOLD, 16, true); // FIXME: Add item name description.
         }
         game->drawSprite(item->getPosition().x, item->getPosition().y + 2 * (sin(3 * timeFromStart) - 1), item->getSprite(), FLOAT_TILESCALE, false, true, true, false);
     }
+}
+
+std::vector<HitBox> *World::getHitBoxes()
+{
+    return &hitboxes;
 }
 
 // Loads map from file.

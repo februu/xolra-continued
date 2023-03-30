@@ -17,6 +17,7 @@ AssetManager::AssetManager()
     addSprite("wood", SPRITE_ITEM_WOOD, true);
     addSprite("stone", SPRITE_ITEM_STONE, true);
     addSprite("cursor", SPRITE_CURSOR, true);
+    addSprite("logo", SPRITE_LOGO, true);
 
     // Loads tile sprites.
     addSprite("tile", SPRITE_TILE_PLAIN, false, "", 0, 0, 16, 16);
@@ -30,8 +31,10 @@ AssetManager::AssetManager()
 
     // Loads all fonts.
     sf::Font font;
-    font.loadFromFile("res/fonts/pixelmix.ttf");
+    font.loadFromFile("res/fonts/abaddon.ttf");
     this->fonts.insert({DEFAULT_FONT, font});
+    font.loadFromFile("res/fonts/abaddon-bold.ttf");
+    this->fonts.insert({DEFAULT_FONT_BOLD, font});
 
     // TODO: Load sounds.
 }

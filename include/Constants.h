@@ -6,6 +6,9 @@
 #define INT_SCREEN_WIDTH 1280
 #define INT_SCREEN_HEIGHT 720
 
+// Splashscreen text/logo.
+#define BOOL_ENABLE_SPLASHSCREEN true
+
 // ============ WORLD ============
 
 // Size of the world.

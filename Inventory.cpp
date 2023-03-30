@@ -46,9 +46,9 @@ Inventory::~Inventory()
 
 void Inventory::addToInventory(int amount, int spriteId)
 {
+    // Checks if item with given spriteId is already in vector. If yes and amount < MAX_STACK_SIZE, then it only increases value. If not, it creates new stack.
     for (auto item = begin(items); item != end(items); ++item)
     {
-        cout << "1";
         if (item->getSpriteId() == spriteId && item->getAmount() < INT_MAX_STACK_SIZE)
         {
             if (item->getAmount() + amount <= INT_MAX_STACK_SIZE)
@@ -68,13 +68,6 @@ void Inventory::addToInventory(int amount, int spriteId)
 
 void Inventory::dropFromInventory(InventoryItem item)
 {
-    // for (auto i = begin(items); i != end(items); ++i)
-    //     if (i->getSpriteId() == i->getSpriteId())
-    //     {
-    //         // TODO: Drop item on ground.
-    //         items.erase(i--);
-    //         break;
-    //     }
 }
 
 InventoryItem Inventory::getHeldItem()
@@ -91,6 +84,7 @@ int Inventory::getCurrentSlot()
     return currentHotbatSlot;
 }
 
+// Changes current slot value.
 void Inventory::setCurrentSlot(int slot)
 {
     if (slot >= INT_HOTBAR_SIZE)
