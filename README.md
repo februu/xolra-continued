@@ -3,7 +3,7 @@
 ### My own rougelike survival game
 
 ❗  __This project is discontinued, however I didn't give up on Xolra. I just changed the whole concept and this repo became slightly irrelevant.__
-Link to new repo here: `soon`
+Visit new repo here: [*click*](https://github.com/februu/xolra)
 
 My second game developed in C++. After big success of [Island Defenders](https://github.com/februu/island-defenders) :tftf:, ya boi decided to make another game but this time inspired by his favourite games including Minecraft, Terraria and The Binding of Isaac.
 
