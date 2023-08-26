@@ -26,8 +26,6 @@ World::World(Game *game)
     item = Item(SPRITE_ITEM_STONE, 204, sf::Vector2f({640.f, 950.f}));
     items.push_back(item);
 
-    HitBox hitbox = HitBox({200, 200}, {200, 200});
-    hitboxes.push_back(hitbox);
     // FIXME: =====================
 
     // World Generation.
@@ -76,7 +74,7 @@ void World::draw(double timeFromStart)
         if (distanceFromPlayer < 40000)
         {
             // For optimisation reasons item pickups are done here (I didnt want to make two vector loops - one in update and one in draw)
-            if (distanceFromPlayer < 1000)
+            if (distanceFromPlayer < 4000)
             {
                 // TODO: Item merging.
                 game->getHud()->addToEventLog("Picked up " + std::to_string(item->getAmount()) + "x " + itemNames.at(item->getSprite()) + ".");
@@ -88,11 +86,6 @@ void World::draw(double timeFromStart)
         }
         game->drawSprite(item->getPosition().x, item->getPosition().y + 2 * (sin(3 * timeFromStart) - 1), item->getSprite(), FLOAT_TILESCALE, false, true, true, false);
     }
-}
-
-std::vector<HitBox> *World::getHitBoxes()
-{
-    return &hitboxes;
 }
 
 // Loads map from file.

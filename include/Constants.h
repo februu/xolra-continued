@@ -7,7 +7,7 @@
 #define INT_SCREEN_HEIGHT 720
 
 // Splashscreen text/logo.
-#define BOOL_ENABLE_SPLASHSCREEN true
+#define BOOL_ENABLE_SPLASHSCREEN false
 
 // ============ WORLD ============
 
@@ -33,7 +33,7 @@
 // ============ PLAYER ===========
 
 // Max speed of a player.
-#define FLOAT_MAX_VELOCITY 4.f
+#define FLOAT_MAX_VELOCITY 6.f
 
 // ============= PET =============
 

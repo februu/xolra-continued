@@ -28,9 +28,9 @@ void Hud::drawDebugInfo()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
     {
-        game->drawText(16, 16, "playerpos=" + std::to_string(game->getPlayer()->getPosition().x) + "," + std::to_string(game->getPlayer()->getPosition().y), DEFAULT_FONT_BOLD, 8);
-        game->drawText(16, 16 + (8 + 4) * 1, "camerapos=" + std::to_string(game->getCamera()->getPosition().x) + "," + std::to_string(game->getCamera()->getPosition().y), DEFAULT_FONT_BOLD, 8);
-        game->drawText(16, 16 + (8 + 4) * 2, "cameraoffset=" + std::to_string(game->getCamera()->getOffset().x) + "," + std::to_string(game->getCamera()->getOffset().y), DEFAULT_FONT_BOLD, 8);
+        game->drawText(16, 16, "playerpos=" + std::to_string(game->getPlayer()->getPosition().x) + "," + std::to_string(game->getPlayer()->getPosition().y), DEFAULT_FONT_BOLD, 16);
+        game->drawText(16, 32 + (8 + 4) * 1, "camerapos=" + std::to_string(game->getCamera()->getPosition().x) + "," + std::to_string(game->getCamera()->getPosition().y), DEFAULT_FONT_BOLD, 16);
+        game->drawText(16, 48 + (8 + 4) * 2, "cameraoffset=" + std::to_string(game->getCamera()->getOffset().x) + "," + std::to_string(game->getCamera()->getOffset().y), DEFAULT_FONT_BOLD, 16);
     }
 }
 

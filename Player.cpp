@@ -7,7 +7,6 @@
 #include "include/Game.h"
 #include "include/Player.h"
 #include "include/Camera.h"
-#include "include/Hitbox.h"
 
 Player::Player(Game *game)
 {
@@ -16,7 +15,7 @@ Player::Player(Game *game)
     rawPosition.y = 400.f;
     position.x = 600.f;
     position.y = 400.f;
-    hitbox = HitBox(position, sf::Vector2f(50, 50));
+    hitbox = sf::RectangleShape(sf::Vector2f(50, 50));
 }
 
 Player::~Player()
@@ -37,54 +36,61 @@ void Player::update(double deltaTime)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
         resultant.y += 1;
 
+    // Collision check.
+
+    // Example hitbox.
+    sf::FloatRect squareBox(200.f, 200.f, 200.f, 200.f);
+
+    sf::FloatRect currentHitbox(rawPosition.x + game->getCamera()->getOffset().x, rawPosition.y + game->getCamera()->getOffset().y, hitbox.getSize().x, hitbox.getSize().y);
+    if (squareBox.intersects(currentHitbox))
+    {
+        // Check side
+        const float TOLERANCE = 20.f;
+
+        // X-axis collision check.
+        if ((currentHitbox.left + currentHitbox.width - squareBox.left) < TOLERANCE)
+        {
+            float penetration = currentHitbox.left + currentHitbox.width - squareBox.left;
+            rawPosition.x -= penetration;
+        }
+        else if ((squareBox.left + squareBox.width - currentHitbox.left) < TOLERANCE)
+        {
+            float penetration = squareBox.left + squareBox.width - currentHitbox.left;
+            rawPosition.x += penetration;
+        }
+
+        // Y-axis collision check.
+        if ((currentHitbox.top + currentHitbox.height - squareBox.top) < TOLERANCE)
+        {
+            float penetration = currentHitbox.top + currentHitbox.height - squareBox.top;
+            rawPosition.y -= penetration;
+        }
+        else if ((squareBox.top + squareBox.height - currentHitbox.top) < TOLERANCE)
+        {
+            float penetration = squareBox.top + squareBox.height - currentHitbox.top;
+            rawPosition.y += penetration;
+        }
+    }
+
     // Normalizes vector (prevents diagonal movement from being faster).
     float normalizeVector = 1.f;
     if (resultant.x != 0 && resultant.y != 0)
-        normalizeVector = 0.71f;
-
-    // Sets new player'rawPosition.
-
-    // TODO: Clamp this value between 0 - 1600 px.
-    sf::Vector2f oldRawPosition = rawPosition;
+        normalizeVector = 0.70f;
 
     // Calculates amount of pixels player should move.
     float _changeX = FLOAT_MAX_VELOCITY * resultant.x * deltaTime * 100;
     float _changeY = FLOAT_MAX_VELOCITY * resultant.y * deltaTime * 100;
 
-    // Calculates new (future) positions for player.
+    // Calculates new positions for player.
     rawUnnormalizedPosition.x = rawPosition.x + _changeX;
     rawUnnormalizedPosition.y = rawPosition.y + _changeY;
     rawPosition.x = rawPosition.x + _changeX * normalizeVector;
     rawPosition.y = rawPosition.y + _changeY * normalizeVector;
 
-    // Sets actual player position.
     float x = (rawPosition.x - position.x) / 5;
     float y = (rawPosition.y - position.y) / 5;
     position.x = position.x + x * deltaTime * 100;
     position.y = position.y + y * deltaTime * 100;
-
-    // Collision check.
-    for (auto hb = begin(*game->getWorld()->getHitBoxes()); hb != end(*game->getWorld()->getHitBoxes()); ++hb)
-    {
-
-        // Horizontal collision;
-        hitbox.updatePosition({rawPosition.x, oldRawPosition.y});
-        if (hb->checkIfCollides(hitbox))
-        {
-            rawPosition = {oldRawPosition.x, rawUnnormalizedPosition.y};
-            hitbox.updatePosition({oldRawPosition.x, rawUnnormalizedPosition.y});
-            continue;
-        }
-
-        // Vertical collision.
-        hitbox.updatePosition({oldRawPosition.x, rawPosition.y});
-        if (hb->checkIfCollides(hitbox))
-        {
-            rawPosition = {rawUnnormalizedPosition.x, oldRawPosition.y};
-            hitbox.updatePosition({rawUnnormalizedPosition.x, oldRawPosition.y});
-            continue;
-        }
-    }
 }
 
 void Player::draw()
@@ -92,18 +98,23 @@ void Player::draw()
 
     // FIXME: Add assets/remove circles.
     //  Radius = 25.
+    sf::RectangleShape squareBox({200.f, 200.f});
+    squareBox.setFillColor(sf::Color(180, 0, 180));
+    squareBox.setPosition({200.f - 2 * game->getCamera()->getOffset().x, 200.f - 2 * game->getCamera()->getOffset().y});
+    game->getWindow()->draw(squareBox);
+
     sf::CircleShape shape(25);
     shape.setFillColor(sf::Color(100, 250, 50));
     shape.setPosition({position.x - game->getCamera()->getOffset().x, position.y - game->getCamera()->getOffset().y});
     game->getWindow()->draw(shape);
+
+    sf::CircleShape shapes(5);
+    shapes.setFillColor(sf::Color(255, 255, 255));
+    shapes.setPosition({rawPosition.x - game->getCamera()->getOffset().x + 20, rawPosition.y - game->getCamera()->getOffset().y + 20});
+    game->getWindow()->draw(shapes);
 }
 
 sf::Vector2f Player::getPosition()
 {
     return position;
-}
-
-HitBox *Player::getHitbox()
-{
-    return &hitbox;
 }
