@@ -28,12 +28,6 @@ void Game::handleEvents()
 {
     while (window->pollEvent(sfEvent))
     {
-        if (sfEvent.type == sf::Event::MouseWheelScrolled)
-            if (sfEvent.mouseWheelScroll.delta > 0) // SCROLL UP
-                player.getInventory()->setCurrentSlot(player.getInventory()->getCurrentSlot() - 1);
-            else if (sfEvent.mouseWheelScroll.delta < 0) // SCROLL DOWN
-                player.getInventory()->setCurrentSlot(player.getInventory()->getCurrentSlot() + 1);
-
         // Handle windows events like closing, moving or alt+tabbing.
         if (sfEvent.type == sf::Event::Closed)
             window->close();

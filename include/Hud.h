@@ -13,7 +13,6 @@ private:
 
     void drawDebugInfo();
     void drawEventLog(double deltaTime);
-    void drawItemHotbar();
 
 public:
     Hud(Game *game);

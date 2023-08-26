@@ -12,8 +12,6 @@ AssetManager::AssetManager()
     // addSprite("bg", true);
 
     addSprite("bat", SPRITE_PET, true);
-    addSprite("eqhotbar", SPRITE_HOTBAR, true);
-    addSprite("eqhotbar_active", SPRITE_HOTBAR_ACTIVE, true);
     addSprite("wood", SPRITE_ITEM_WOOD, true);
     addSprite("stone", SPRITE_ITEM_STONE, true);
     addSprite("cursor", SPRITE_CURSOR, true);

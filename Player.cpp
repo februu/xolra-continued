@@ -7,7 +7,6 @@
 #include "include/Game.h"
 #include "include/Player.h"
 #include "include/Camera.h"
-#include "include/Inventory.h"
 #include "include/Hitbox.h"
 
 Player::Player(Game *game)
@@ -102,11 +101,6 @@ void Player::draw()
 sf::Vector2f Player::getPosition()
 {
     return position;
-}
-
-Inventory *Player::getInventory()
-{
-    return &inventory;
 }
 
 HitBox *Player::getHitbox()

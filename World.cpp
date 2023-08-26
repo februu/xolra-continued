@@ -9,7 +9,6 @@
 #include "include/Camera.h"
 #include "include/Item.h"
 #include "include/Sprites.h"
-#include "include/Inventory.h"
 
 World::World(Game *game)
 {
@@ -81,7 +80,6 @@ void World::draw(double timeFromStart)
             {
                 // TODO: Item merging.
                 game->getHud()->addToEventLog("Picked up " + std::to_string(item->getAmount()) + "x " + itemNames.at(item->getSprite()) + ".");
-                game->getPlayer()->getInventory()->addToInventory(item->getAmount(), item->getSprite());
                 items.erase(item--);
                 continue;
             }
