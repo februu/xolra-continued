@@ -7,6 +7,8 @@
 
 #include "Constants.h"
 #include "Item.h"
+#include "Projectile.h"
+#include "Enemy.h"
 
 class Game;
 
@@ -18,6 +20,10 @@ private:
     int tilemap[INT_WORLDSIZE][INT_WORLDSIZE];
     std::vector<Item> items;
 
+    // Projectiles
+    double projectileTimer = 0;
+    std::vector<Projectile> projectiles;
+
     int loadMapFromFile();
 
 public:
@@ -27,4 +33,5 @@ public:
     int *getWorld();
     void update(double deltaTime);
     void draw(double timeFromStart);
+    std::vector<Enemy> enemies;
 };

@@ -39,38 +39,38 @@ void Player::update(double deltaTime)
     // Collision check.
 
     // Example hitbox.
-    sf::FloatRect squareBox(200.f, 200.f, 200.f, 200.f);
+    // sf::FloatRect squareBox(200.f, 200.f, 200.f, 200.f);
 
-    sf::FloatRect currentHitbox(rawPosition.x + game->getCamera()->getOffset().x, rawPosition.y + game->getCamera()->getOffset().y, hitbox.getSize().x, hitbox.getSize().y);
-    if (squareBox.intersects(currentHitbox))
-    {
-        // Check side
-        const float TOLERANCE = 20.f;
+    // sf::FloatRect currentHitbox(rawPosition.x + game->getCamera()->getOffset().x, rawPosition.y + game->getCamera()->getOffset().y, hitbox.getSize().x, hitbox.getSize().y);
+    // if (squareBox.intersects(currentHitbox))
+    // {
+    //     // Check side
+    //     const float TOLERANCE = 20.f;
 
-        // X-axis collision check.
-        if ((currentHitbox.left + currentHitbox.width - squareBox.left) < TOLERANCE)
-        {
-            float penetration = currentHitbox.left + currentHitbox.width - squareBox.left;
-            rawPosition.x -= penetration;
-        }
-        else if ((squareBox.left + squareBox.width - currentHitbox.left) < TOLERANCE)
-        {
-            float penetration = squareBox.left + squareBox.width - currentHitbox.left;
-            rawPosition.x += penetration;
-        }
+    //     // X-axis collision check.
+    //     if ((currentHitbox.left + currentHitbox.width - squareBox.left) < TOLERANCE)
+    //     {
+    //         float penetration = currentHitbox.left + currentHitbox.width - squareBox.left;
+    //         rawPosition.x -= penetration;
+    //     }
+    //     else if ((squareBox.left + squareBox.width - currentHitbox.left) < TOLERANCE)
+    //     {
+    //         float penetration = squareBox.left + squareBox.width - currentHitbox.left;
+    //         rawPosition.x += penetration;
+    //     }
 
-        // Y-axis collision check.
-        if ((currentHitbox.top + currentHitbox.height - squareBox.top) < TOLERANCE)
-        {
-            float penetration = currentHitbox.top + currentHitbox.height - squareBox.top;
-            rawPosition.y -= penetration;
-        }
-        else if ((squareBox.top + squareBox.height - currentHitbox.top) < TOLERANCE)
-        {
-            float penetration = squareBox.top + squareBox.height - currentHitbox.top;
-            rawPosition.y += penetration;
-        }
-    }
+    //     // Y-axis collision check.
+    //     if ((currentHitbox.top + currentHitbox.height - squareBox.top) < TOLERANCE)
+    //     {
+    //         float penetration = currentHitbox.top + currentHitbox.height - squareBox.top;
+    //         rawPosition.y -= penetration;
+    //     }
+    //     else if ((squareBox.top + squareBox.height - currentHitbox.top) < TOLERANCE)
+    //     {
+    //         float penetration = squareBox.top + squareBox.height - currentHitbox.top;
+    //         rawPosition.y += penetration;
+    //     }
+    // }
 
     // Normalizes vector (prevents diagonal movement from being faster).
     float normalizeVector = 1.f;
@@ -98,10 +98,6 @@ void Player::draw()
 
     // FIXME: Add assets/remove circles.
     //  Radius = 25.
-    sf::RectangleShape squareBox({200.f, 200.f});
-    squareBox.setFillColor(sf::Color(180, 0, 180));
-    squareBox.setPosition({200.f - 2 * game->getCamera()->getOffset().x, 200.f - 2 * game->getCamera()->getOffset().y});
-    game->getWindow()->draw(squareBox);
 
     sf::CircleShape shape(25);
     shape.setFillColor(sf::Color(100, 250, 50));

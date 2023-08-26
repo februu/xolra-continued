@@ -6,9 +6,11 @@
 #include "include/Math.h"
 #include "include/World.h"
 #include "include/Game.h"
+#include "include/Enemy.h"
 #include "include/Camera.h"
 #include "include/Item.h"
 #include "include/Sprites.h"
+#include "include/Projectile.h"
 
 World::World(Game *game)
 {
@@ -25,6 +27,9 @@ World::World(Game *game)
     items.push_back(item);
     item = Item(SPRITE_ITEM_STONE, 204, sf::Vector2f({640.f, 950.f}));
     items.push_back(item);
+
+    Enemy enemy({300.f, 300.f}, game);
+    enemies.push_back(enemy);
 
     // FIXME: =====================
 
@@ -50,6 +55,25 @@ int *World::getWorld()
 
 void World::update(double deltaTime)
 {
+    // Spawns new projectiles every 0.2 seconds. 25 is spirte center offset.
+    if (projectileTimer > 0.1)
+    {
+        sf::Vector2f position = game->getPlayer()->getPosition() + game->getCamera()->getOffset();
+        Projectile projectile({position.x + 25, position.y + 25}, game);
+        projectiles.push_back(projectile);
+        projectileTimer = 0;
+    }
+    else
+    {
+        projectileTimer += deltaTime;
+    }
+
+    // Updates projectiles.
+    for (auto projectile = begin(projectiles); projectile != end(projectiles); ++projectile)
+    {
+        if (projectile->update(deltaTime))
+            projectiles.erase(projectile--);
+    }
 }
 
 void World::draw(double timeFromStart)
@@ -85,6 +109,18 @@ void World::draw(double timeFromStart)
                 game->drawText(item->getPosition().x - FLOAT_TILESCALE * game->getCamera()->getOffset().x, item->getPosition().y - FLOAT_TILESCALE * game->getCamera()->getOffset().y - 20, std::to_string(item->getAmount()) + "x " + itemNames.at(item->getSprite()), DEFAULT_FONT_BOLD, 16, true); // FIXME: Add item name description.
         }
         game->drawSprite(item->getPosition().x, item->getPosition().y + 2 * (sin(3 * timeFromStart) - 1), item->getSprite(), FLOAT_TILESCALE, false, true, true, false);
+    }
+
+    // Draws enemies.
+    for (auto enemy = begin(enemies); enemy != end(enemies); ++enemy)
+    {
+        enemy->draw();
+    }
+
+    // Draws projectiles.
+    for (auto projectile = begin(projectiles); projectile != end(projectiles); ++projectile)
+    {
+        projectile->draw();
     }
 }
 

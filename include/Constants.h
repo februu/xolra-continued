@@ -22,14 +22,6 @@
 // Max speed of camera (the lower, the higher).
 #define FLOAT_MAX_CAMERA_VELOCITY 25.f
 
-// ========== INVENTORY ==========
-
-// Amount of items shown on hotbar.
-#define INT_HOTBAR_SIZE 10
-
-// Max Stack Size
-#define INT_MAX_STACK_SIZE 999
-
 // ============ PLAYER ===========
 
 // Max speed of a player.
