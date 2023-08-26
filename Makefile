@@ -1,5 +1,5 @@
-COMPILEFLAGS	 = -I"libs\include" -DSFML_STATIC
-LINKFLAGS	 = -o main -L"libs\lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -lsfml-main
+COMPILEFLAGS	 = -I"libs/include" -DSFML_STATIC
+LINKFLAGS	 = -o main -L"libs/lib" -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -lsfml-main -ldiscord
 
 all: preclean compile link clean
 

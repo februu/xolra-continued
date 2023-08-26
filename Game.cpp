@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <ctime>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -12,11 +13,25 @@
 #include "include/AssetManager.h"
 #include "include/Sprites.h"
 
+#include "libs/include/discord/discord.h"
+
 using std::cout;
 
 Game::Game()
 {
     this->createWindow();
+
+    // Initializes Discord core.
+    // TODO: Change discord client token.
+    auto result = discord::Core::Create(1092102719805853746, DiscordCreateFlags_Default, &core);
+    discord::Activity activity{};
+    activity.SetState("febru.me");
+    activity.SetDetails("Coding & Testing...");
+    activity.GetAssets().SetLargeImage("logo");
+    activity.GetAssets().SetLargeText("Xolra");
+    activity.GetTimestamps().SetStart(discord::Timestamp(std::time(0)));
+    core->ActivityManager()
+        .UpdateActivity(activity, [](discord::Result result) {});
 }
 
 Game::~Game()
@@ -79,6 +94,9 @@ void Game::run()
             handleEvents();
             drawSplashScreen();
         }
+
+        // Runs Discord Callbacks.
+        core->RunCallbacks();
     }
 }
 

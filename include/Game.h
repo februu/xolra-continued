@@ -8,6 +8,7 @@
 #include "Pet.h"
 #include "Camera.h"
 #include "World.h"
+#include "../libs/include/discord/discord.h"
 
 class Game
 {
@@ -17,6 +18,7 @@ private:
     sf::Event sfEvent;
     AssetManager am;
     sf::RenderWindow *window;
+    discord::Core *core{};
 
     // Gameplay Variables
     int gameState = 0;
