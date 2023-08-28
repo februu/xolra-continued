@@ -7,15 +7,13 @@ class Game;
 class Projectile
 {
 private:
-    sf::Vector2f position;
-    Enemy *target = nullptr;
+    sf::Vector2f position, direction;
     Game *game;
-
-    int travelledDistance = 0;
-    int maxDistance = 300;
+    float travelledDistance = 0;
+    float maxDistance = 500;
 
 public:
-    Projectile(sf::Vector2f position, Game *game);
+    Projectile(sf::Vector2f position, sf::Vector2f direction, Game *game);
     virtual ~Projectile();
 
     // Functions

@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <random>
 #include <ctime>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -19,7 +20,12 @@ using std::cout;
 
 Game::Game()
 {
+    // Creates window.
     this->createWindow();
+
+    // Initializes random number generator.
+    std::random_device rd;
+    gen = std::mt19937(rd());
 
     // Initializes Discord core.
     // TODO: Change discord client token.
@@ -65,7 +71,7 @@ void Game::update()
 
 void Game::draw()
 {
-    window->clear(sf::Color(34, 32, 34, 255));
+    window->clear(sf::Color(27, 27, 27, 255));
 
     // RENDERING
     world.draw(timeFromStart);

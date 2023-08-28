@@ -12,7 +12,9 @@ private:
     std::vector<std::pair<double, std::string>> eventLog;
 
     void drawDebugInfo();
+    void drawStats();
     void drawEventLog(double deltaTime);
+    void drawGameHud(double deltaTime);
 
 public:
     Hud(Game *game);

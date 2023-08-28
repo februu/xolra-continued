@@ -9,6 +9,9 @@
 // Splashscreen text/logo.
 #define BOOL_ENABLE_SPLASHSCREEN false
 
+// Splashscreen text/logo.
+#define INT_HUDSCALE 2
+
 // ============ WORLD ============
 
 // Size of the world.
@@ -25,7 +28,7 @@
 // ============ PLAYER ===========
 
 // Max speed of a player.
-#define FLOAT_MAX_VELOCITY 6.f
+#define FLOAT_MAX_VELOCITY 4.f
 
 // ============= PET =============
 

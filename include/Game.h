@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <random>
 #include "AssetManager.h"
 #include "Player.h"
 #include "Hud.h"
@@ -37,6 +38,9 @@ private:
 public:
     Game();
     virtual ~Game();
+
+    // Random Generator
+    std::mt19937 gen;
 
     // Main Functions
     void handleEvents();

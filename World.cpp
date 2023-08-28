@@ -55,11 +55,21 @@ int *World::getWorld()
 
 void World::update(double deltaTime)
 {
-    // Spawns new projectiles every 0.2 seconds. 25 is spirte center offset.
-    if (projectileTimer > 0.1)
+    // Updates enemies. Searches if there is enemy in close range.
+    bool isEnemyNearby = false;
+
+    for (auto enemy : game->getWorld()->enemies)
+    {
+        // Searches for nearby enemies. Only targets enemies within 500 units of range.
+        sf::Vector2f playerEnemyVector = game->getPlayer()->getPosition() - enemy.getPosition();
+        if (!isEnemyNearby)
+            isEnemyNearby = sqrt((playerEnemyVector.x * playerEnemyVector.x) + (playerEnemyVector.y * playerEnemyVector.y)) < 500;
+    };
+
+    if (projectileTimer > 0.05 && isEnemyNearby)
     {
         sf::Vector2f position = game->getPlayer()->getPosition() + game->getCamera()->getOffset();
-        Projectile projectile({position.x + 25, position.y + 25}, game);
+        Projectile projectile({position.x + 25, position.y + 25}, sf::Vector2f(sf::Mouse::getPosition(*game->getWindow())) - sf::Vector2f(position.x + 25, position.y + 25) + sf::Vector2f(FLOAT_TILESCALE * game->getCamera()->getOffset().x, FLOAT_TILESCALE * game->getCamera()->getOffset().y), game);
         projectiles.push_back(projectile);
         projectileTimer = 0;
     }
