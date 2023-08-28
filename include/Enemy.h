@@ -12,7 +12,7 @@ private:
     sf::RectangleShape hitbox;
     Game *game;
     Player *player;
-    float speed = 2.f;
+    float speed = 3.f;
     int health = 30;
 
 public:

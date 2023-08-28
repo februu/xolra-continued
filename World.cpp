@@ -55,9 +55,13 @@ int *World::getWorld()
 
 void World::update(double deltaTime)
 {
-    // Updates enemies. Searches if there is enemy in close range.
-    bool isEnemyNearby = false;
+    // Updates projectiles.
+    for (auto projectile = begin(projectiles); projectile != end(projectiles); ++projectile)
+        if (projectile->update(deltaTime))
+            projectiles.erase(projectile--);
 
+    // Updates enemies.
+    bool isEnemyNearby = false;
     for (auto enemy = begin(enemies); enemy != end(enemies); ++enemy)
     {
         enemy->update(deltaTime);
@@ -68,22 +72,30 @@ void World::update(double deltaTime)
             isEnemyNearby = sqrt((playerEnemyVector.x * playerEnemyVector.x) + (playerEnemyVector.y * playerEnemyVector.y)) < INT_SCREEN_HEIGHT / 2;
     };
 
-    if (projectileTimer > 0.05 && isEnemyNearby)
+    // Creates new projectiles.
+    if (projectileTimer > 0.05f && isEnemyNearby)
     {
         sf::Vector2f position = game->getPlayer()->getPosition() + game->getCamera()->getOffset();
         Projectile projectile({position.x + 25, position.y + 25}, sf::Vector2f(sf::Mouse::getPosition(*game->getWindow())) - sf::Vector2f(position.x + 25, position.y + 25) + sf::Vector2f(FLOAT_TILESCALE * game->getCamera()->getOffset().x, FLOAT_TILESCALE * game->getCamera()->getOffset().y), game);
         projectiles.push_back(projectile);
-        projectileTimer = 0;
+        projectileTimer = 0.f;
     }
     else
     {
         projectileTimer += deltaTime;
     }
 
-    // Updates projectiles.
-    for (auto projectile = begin(projectiles); projectile != end(projectiles); ++projectile)
-        if (projectile->update(deltaTime))
-            projectiles.erase(projectile--);
+    // Spawns new enemies
+    if (enemyTimer > 2.f)
+    {
+        Enemy enemy({300.f, 300.f}, game);
+        enemies.push_back(enemy);
+        enemyTimer = 0.f;
+    }
+    else
+    {
+        enemyTimer += deltaTime;
+    }
 }
 
 void World::draw(double timeFromStart)

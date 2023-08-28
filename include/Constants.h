@@ -28,7 +28,7 @@
 // ============ PLAYER ===========
 
 // Max speed of a player.
-#define FLOAT_MAX_VELOCITY 4.f
+#define FLOAT_MAX_VELOCITY 5.f
 
 // ============= PET =============
 

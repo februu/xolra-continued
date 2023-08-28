@@ -21,8 +21,11 @@ private:
     std::vector<Item> items;
 
     // Projectiles
-    double projectileTimer = 0;
+    float projectileTimer = 0;
     std::vector<Projectile> projectiles;
+
+    // Enemies
+    float enemyTimer = 0;
 
     int loadMapFromFile();
 
