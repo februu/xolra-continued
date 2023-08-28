@@ -113,7 +113,7 @@ void Game::createWindow()
     // if (fullscreenMode)
     //  window = new sf::RenderWindow(sf::VideoMode(screenWidth, screenHeight), "XXX", sf::Style::Fullscreen);
     // else
-    window = new sf::RenderWindow(sf::VideoMode(INT_SCREEN_WIDTH, INT_SCREEN_HEIGHT), "Xolra", sf::Style::Close);
+    window = new sf::RenderWindow(sf::VideoMode(INT_SCREEN_WIDTH, INT_SCREEN_HEIGHT), "Xolra", sf::Style::Fullscreen);
     window->setMouseCursorVisible(false);
     window->setFramerateLimit(300);
     // sf::Image icon = sf::Image();
@@ -152,10 +152,9 @@ void Game::drawSplashScreen()
     timeFromStart += clock.restart().asSeconds();
 }
 
-void Game::drawSprite(float x, float y, int id, float scale, bool flipped, bool cameraOffset, bool centeredX, bool centeredY)
+void Game::drawSprite(float x, float y, int id, float scale, bool flipped, bool cameraOffset, bool centeredX, bool centeredY, float xCropFactor)
 {
-    sf::Sprite sprite;
-    sprite = *am.getSprite(id);
+    sf::Sprite sprite = *am.getSprite(id);
     sprite.setScale(scale, scale);
     if (cameraOffset)
     {
@@ -166,6 +165,11 @@ void Game::drawSprite(float x, float y, int id, float scale, bool flipped, bool 
         x -= scale * sprite.getTexture()->getSize().x / 2;
     if (centeredY)
         y -= scale * sprite.getTexture()->getSize().y / 2;
+    if (xCropFactor > 0)
+    {
+        sf::IntRect textureRect(0, 0, int(sprite.getTexture()->getSize().x * xCropFactor), sprite.getTexture()->getSize().y);
+        sprite.setTextureRect(textureRect);
+    }
     sprite.setPosition(x, y);
     window->draw(sprite);
 }

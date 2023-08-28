@@ -6,6 +6,7 @@
 #include "include/Game.h"
 #include "include/Constants.h"
 #include "include/Math.h"
+#include "include/Sprites.h"
 #include <iostream>
 
 Projectile::Projectile(sf::Vector2f position, sf::Vector2f direction, Game *game)
@@ -16,7 +17,7 @@ Projectile::Projectile(sf::Vector2f position, sf::Vector2f direction, Game *game
     // Applies random offset to bullet and normalizes direction vector.
     direction = normalize(direction);
     std::uniform_real_distribution<float>
-        dis(-0.1f, 0.1f);
+        dis(-0.07f, 0.07f);
     this->direction = normalize(sf::Vector2f(direction.x + dis(game->gen), direction.y + dis(game->gen)));
 }
 
@@ -39,8 +40,5 @@ bool Projectile::update(double deltaTime)
 
 void Projectile::draw()
 {
-    sf::CircleShape shapes(5);
-    shapes.setFillColor(sf::Color(255, 255, 160));
-    shapes.setPosition({position.x - 2 * game->getCamera()->getOffset().x - 5, position.y - 2 * game->getCamera()->getOffset().y - 5});
-    game->getWindow()->draw(shapes);
+    game->drawSprite(position.x - 2, position.y, SPRITE_BULLET, 2, false, true, true, true);
 }

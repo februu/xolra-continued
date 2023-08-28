@@ -56,6 +56,6 @@ public:
     sf::RenderWindow *getWindow();
 
     // Public draw functions
-    void drawSprite(float x, float y, int id, float scale, bool flipped = false, bool cameraOffset = true, bool centeredX = false, bool centeredY = false);
+    void drawSprite(float x, float y, int id, float scale, bool flipped = false, bool cameraOffset = true, bool centeredX = false, bool centeredY = false, float xCropFactor = -1.f);
     void drawText(float x, float y, std::string content, int fontId, float scale, bool centered = false, bool shadow = true, sf::Color color = sf::Color(255, 255, 255, 255));
 };

@@ -3,14 +3,14 @@
 // ============ GAME =============
 
 // Size of a window.
-#define INT_SCREEN_WIDTH 1280
-#define INT_SCREEN_HEIGHT 720
+#define INT_SCREEN_WIDTH 1920
+#define INT_SCREEN_HEIGHT 1080
 
 // Splashscreen text/logo.
 #define BOOL_ENABLE_SPLASHSCREEN false
 
 // Splashscreen text/logo.
-#define INT_HUDSCALE 2
+#define INT_HUDSCALE 4
 
 // ============ WORLD ============
 

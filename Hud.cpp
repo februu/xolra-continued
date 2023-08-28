@@ -58,11 +58,15 @@ void Hud::addToEventLog(std::string event)
 
 void Hud::drawGameHud(double deltaTime)
 {
-    game->drawSprite(INT_SCREEN_WIDTH - 16 * (INT_HUDSCALE + 1), 16, SPRITE_HUD_PAUSE, INT_HUDSCALE, false, false);
+    // game->drawSprite(INT_SCREEN_WIDTH - 16 * (INT_HUDSCALE * 2 + 1), 16, SPRITE_HUD_PAUSE, INT_HUDSCALE * 2, false, false);
+    game->drawSprite(INT_SCREEN_WIDTH / 2, INT_SCREEN_HEIGHT - 16 * INT_HUDSCALE * 2, SPRITE_HUD_PROGRESS, INT_HUDSCALE, false, false, true, false, 0.5);
     game->drawSprite(INT_SCREEN_WIDTH / 2, INT_SCREEN_HEIGHT - 16 * INT_HUDSCALE * 2, SPRITE_HUD_BAR, INT_HUDSCALE, false, false, true);
     game->drawSprite(INT_SCREEN_WIDTH / 2 + 64 * INT_HUDSCALE + 4 * INT_HUDSCALE, INT_SCREEN_HEIGHT - 16 * INT_HUDSCALE * 2, SPRITE_HUD_SLOT, INT_HUDSCALE, false, false);
-    for (int i = 0; i < 5; i++)
-        game->drawSprite(INT_SCREEN_WIDTH / 2 - 64 * INT_HUDSCALE + i * (12 * INT_HUDSCALE), INT_SCREEN_HEIGHT - 16 * INT_HUDSCALE * 2 - 12 * INT_HUDSCALE, SPRITE_HUD_HEART, INT_HUDSCALE, false, false);
+    for (int i = 0; i < 5; i++) // FIXME
+        if (i < 3)
+            game->drawSprite(INT_SCREEN_WIDTH / 2 - 64 * INT_HUDSCALE + i * (12 * INT_HUDSCALE), INT_SCREEN_HEIGHT - 16 * INT_HUDSCALE * 2 - 12 * INT_HUDSCALE, SPRITE_HUD_HEART, INT_HUDSCALE, false, false);
+        else
+            game->drawSprite(INT_SCREEN_WIDTH / 2 - 64 * INT_HUDSCALE + i * (12 * INT_HUDSCALE), INT_SCREEN_HEIGHT - 16 * INT_HUDSCALE * 2 - 12 * INT_HUDSCALE, SPRITE_HUD_EMPTY_HEART, INT_HUDSCALE, false, false);
 }
 
 void Hud::drawStats()

@@ -11,6 +11,7 @@ private:
     sf::Vector2f position;
     Game *game;
     Player *player;
+    float speed = 2.f;
 
 public:
     Enemy(sf::Vector2f position, Game *game);

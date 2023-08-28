@@ -12,13 +12,16 @@ AssetManager::AssetManager()
     addSprite("arrow", SPRITE_HUD_ARROW, true);
     addSprite("bar", SPRITE_HUD_BAR, true);
     addSprite("heart", SPRITE_HUD_HEART, true);
+    addSprite("empty_heart", SPRITE_HUD_EMPTY_HEART, true);
     addSprite("luck", SPRITE_HUD_LUCK, true);
     addSprite("pause", SPRITE_HUD_PAUSE, true);
     addSprite("potion", SPRITE_HUD_POTION, true);
+    addSprite("progress", SPRITE_HUD_PROGRESS, true);
     addSprite("shield", SPRITE_HUD_SHIELD, true);
     addSprite("slot", SPRITE_HUD_SLOT, true);
     addSprite("sword", SPRITE_HUD_SWORD, true);
 
+    addSprite("bullet", SPRITE_BULLET, true);
     addSprite("bat", SPRITE_PET, true);
     addSprite("wood", SPRITE_ITEM_WOOD, true);
     addSprite("stone", SPRITE_ITEM_STONE, true);

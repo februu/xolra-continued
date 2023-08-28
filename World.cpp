@@ -58,12 +58,14 @@ void World::update(double deltaTime)
     // Updates enemies. Searches if there is enemy in close range.
     bool isEnemyNearby = false;
 
-    for (auto enemy : game->getWorld()->enemies)
+    for (auto enemy = begin(enemies); enemy != end(enemies); ++enemy)
     {
+        enemy->update(deltaTime);
+
         // Searches for nearby enemies. Only targets enemies within 500 units of range.
-        sf::Vector2f playerEnemyVector = game->getPlayer()->getPosition() - enemy.getPosition();
+        sf::Vector2f playerEnemyVector = game->getPlayer()->getPosition() + game->getCamera()->getOffset() - enemy->getPosition();
         if (!isEnemyNearby)
-            isEnemyNearby = sqrt((playerEnemyVector.x * playerEnemyVector.x) + (playerEnemyVector.y * playerEnemyVector.y)) < 500;
+            isEnemyNearby = sqrt((playerEnemyVector.x * playerEnemyVector.x) + (playerEnemyVector.y * playerEnemyVector.y)) < INT_SCREEN_HEIGHT / 2;
     };
 
     if (projectileTimer > 0.05 && isEnemyNearby)
