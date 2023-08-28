@@ -32,6 +32,18 @@ bool Projectile::update(double deltaTime)
     if (travelledDistance > maxDistance)
         return true;
 
+    sf::FloatRect selfHitbox({position.x - (8 * FLOAT_TILESCALE / 2), position.y - (8 * FLOAT_TILESCALE / 2), 8 * FLOAT_TILESCALE, 8 * FLOAT_TILESCALE});
+    for (auto enemy = begin(game->getWorld()->enemies); enemy != end(game->getWorld()->enemies); ++enemy)
+    {
+        sf::FloatRect enemyHitbox({enemy->getHitboxPosition().x, enemy->getHitboxPosition().y, enemy->getHitboxSize().x, enemy->getHitboxSize().y});
+        if (selfHitbox.intersects(enemyHitbox))
+        {
+            if (enemy->dealDamage(1))
+                game->getWorld()->enemies.erase(enemy--);
+            return true;
+        }
+    }
+
     // Moves projectile by the same distance every frame in direction given by normalized vector.
     position += sf::Vector2f(direction.x * deltaTime * 1000, direction.y * deltaTime * 1000);
     travelledDistance += sqrt((direction.x * direction.x) + (direction.y * direction.y));

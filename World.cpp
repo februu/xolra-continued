@@ -82,10 +82,8 @@ void World::update(double deltaTime)
 
     // Updates projectiles.
     for (auto projectile = begin(projectiles); projectile != end(projectiles); ++projectile)
-    {
         if (projectile->update(deltaTime))
             projectiles.erase(projectile--);
-    }
 }
 
 void World::draw(double timeFromStart)

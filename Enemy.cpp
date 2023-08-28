@@ -10,6 +10,7 @@ Enemy::Enemy(sf::Vector2f position, Game *game)
     this->game = game;
     this->player = game->getPlayer();
     this->position = position;
+    this->hitbox = sf::RectangleShape({40, 40});
 }
 
 Enemy::~Enemy()
@@ -30,9 +31,30 @@ void Enemy::draw()
     shapes.setFillColor(sf::Color(255, 255, 255));
     shapes.setPosition({position.x - 2 * game->getCamera()->getOffset().x - 20, position.y - 2 * game->getCamera()->getOffset().y - 20});
     game->getWindow()->draw(shapes);
+
+    // Draws hitbox.
+    // sf::RectangleShape hitboxShape(hitbox.getSize());
+    // hitboxShape.setPosition(position);
+    // game->getWindow()->draw(hitboxShape);
 }
 
 sf::Vector2f Enemy::getPosition()
 {
     return position;
+}
+
+sf::Vector2f Enemy::getHitboxPosition()
+{
+    return position - sf::Vector2f(20, 20);
+}
+
+sf::Vector2f Enemy::getHitboxSize()
+{
+    return hitbox.getSize();
+}
+
+bool Enemy::dealDamage(int damage)
+{
+    health -= damage;
+    return health < 0;
 }
