@@ -69,7 +69,7 @@ void World::update(double deltaTime)
         // Searches for nearby enemies. Only targets enemies within 500 units of range.
         sf::Vector2f playerEnemyVector = game->getPlayer()->getPosition() + game->getCamera()->getOffset() - enemy->getPosition();
         if (!isEnemyNearby)
-            isEnemyNearby = sqrt((playerEnemyVector.x * playerEnemyVector.x) + (playerEnemyVector.y * playerEnemyVector.y)) < INT_SCREEN_HEIGHT / 2;
+            isEnemyNearby = sqrt((playerEnemyVector.x * playerEnemyVector.x) + (playerEnemyVector.y * playerEnemyVector.y)) < INT_SCREEN_WIDTH / 2;
     };
 
     // Creates new projectiles.
@@ -86,7 +86,7 @@ void World::update(double deltaTime)
     }
 
     // Spawns new enemies
-    if (enemyTimer > 2.f)
+    if (enemyTimer > 2.f && enemies.size() < INT_ENTITY_LIMIT)
     {
         Enemy enemy({300.f, 300.f}, game);
         enemies.push_back(enemy);

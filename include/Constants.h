@@ -20,6 +20,9 @@
 // Scale of single tile.
 #define FLOAT_TILESCALE 2.f
 
+// Enemy entity limit
+#define INT_ENTITY_LIMIT 100
+
 // ============ CAMERA ===========
 
 // Max speed of camera (the lower, the higher).

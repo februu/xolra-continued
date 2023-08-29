@@ -20,6 +20,7 @@ AssetManager::AssetManager()
     addSprite("shield", SPRITE_HUD_SHIELD, true);
     addSprite("slot", SPRITE_HUD_SLOT, true);
     addSprite("sword", SPRITE_HUD_SWORD, true);
+    addSprite("health_bar", SPRITE_HUD_HEALTH_BAR, true);
 
     addSprite("bullet", SPRITE_BULLET, true);
     addSprite("bat", SPRITE_PET, true);

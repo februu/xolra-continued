@@ -14,6 +14,7 @@ private:
     Player *player;
     float speed = 3.f;
     int health = 30;
+    int max_health = 30;
 
 public:
     Enemy(sf::Vector2f position, Game *game);
