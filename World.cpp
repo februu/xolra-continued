@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
+#include <random>
 #include "include/Constants.h"
 #include "include/Math.h"
 #include "include/World.h"
@@ -28,8 +29,9 @@ World::World(Game *game)
     item = Item(SPRITE_ITEM_STONE, 204, sf::Vector2f({640.f, 950.f}));
     items.push_back(item);
 
-    Enemy enemy({300.f, 300.f}, game);
-    enemies.push_back(enemy);
+    intDistribution = std::uniform_int_distribution<int>(0, 1);
+    widthDistribution = std::uniform_real_distribution<float>(0.f, float(INT_SCREEN_WIDTH * 2));
+    heightDistribution = std::uniform_real_distribution<float>(0.f, float(INT_SCREEN_HEIGHT * 2));
 
     // FIXME: =====================
 
@@ -60,6 +62,13 @@ void World::update(double deltaTime)
         if (projectile->update(deltaTime))
             projectiles.erase(projectile--);
 
+    // Updates textParticles.
+    for (auto particle = begin(textParticles); particle != end(textParticles); ++particle)
+    {
+        if (particle->update(deltaTime))
+            textParticles.erase(particle--);
+    }
+
     // Updates enemies.
     bool isEnemyNearby = false;
     for (auto enemy = begin(enemies); enemy != end(enemies); ++enemy)
@@ -86,10 +95,13 @@ void World::update(double deltaTime)
     }
 
     // Spawns new enemies
-    if (enemyTimer > 2.f && enemies.size() < INT_ENTITY_LIMIT)
+    if (enemyTimer > 3.f && enemies.size() < INT_ENTITY_LIMIT)
     {
-        Enemy enemy({300.f, 300.f}, game);
-        enemies.push_back(enemy);
+        for (int i = 0; i < 50; i++)
+        {
+            Enemy enemy({widthDistribution(game->gen), heightDistribution(game->gen)}, game);
+            enemies.push_back(enemy);
+        }
         enemyTimer = 0.f;
     }
     else
@@ -143,6 +155,12 @@ void World::draw(double timeFromStart)
     for (auto projectile = begin(projectiles); projectile != end(projectiles); ++projectile)
     {
         projectile->draw();
+    }
+
+    // Draws textParticles.
+    for (auto particle = begin(textParticles); particle != end(textParticles); ++particle)
+    {
+        particle->draw();
     }
 }
 

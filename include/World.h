@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <random>
 #include <string>
 #include <vector>
 #include <SFML/Graphics.hpp>
@@ -8,6 +9,7 @@
 #include "Constants.h"
 #include "Item.h"
 #include "Projectile.h"
+#include "Particle.h"
 #include "Enemy.h"
 
 class Game;
@@ -22,10 +24,14 @@ private:
 
     // Projectiles
     float projectileTimer = 0;
-    std::vector<Projectile> projectiles;
 
     // Enemies
     float enemyTimer = 0;
+
+    // Random Distributions
+    std::uniform_int_distribution<int> intDistribution;
+    std::uniform_real_distribution<float> widthDistribution;
+    std::uniform_real_distribution<float> heightDistribution;
 
     int loadMapFromFile();
 
@@ -37,4 +43,6 @@ public:
     void update(double deltaTime);
     void draw(double timeFromStart);
     std::vector<Enemy> enemies;
+    std::vector<TextParticle> textParticles;
+    std::vector<Projectile> projectiles;
 };

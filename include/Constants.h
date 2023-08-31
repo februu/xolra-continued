@@ -21,7 +21,7 @@
 #define FLOAT_TILESCALE 2.f
 
 // Enemy entity limit
-#define INT_ENTITY_LIMIT 100
+#define INT_ENTITY_LIMIT 3000
 
 // ============ CAMERA ===========
 

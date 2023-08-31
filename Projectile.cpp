@@ -7,6 +7,7 @@
 #include "include/Constants.h"
 #include "include/Math.h"
 #include "include/Sprites.h"
+#include "include/Particle.h"
 #include <iostream>
 
 Projectile::Projectile(sf::Vector2f position, sf::Vector2f direction, Game *game)
@@ -38,7 +39,9 @@ bool Projectile::update(double deltaTime)
         sf::FloatRect enemyHitbox({enemy->getHitboxPosition().x, enemy->getHitboxPosition().y, enemy->getHitboxSize().x, enemy->getHitboxSize().y});
         if (selfHitbox.intersects(enemyHitbox))
         {
-            if (enemy->dealDamage(1))
+            TextParticle particle(position - game->getCamera()->getOffset() - game->getCamera()->getOffset(), "10.7", sf::Color::Yellow, 24.f, 0.2f, game);
+            game->getWorld()->textParticles.push_back(particle);
+            if (enemy->dealDamage(10.7))
                 game->getWorld()->enemies.erase(enemy--);
             return true;
         }

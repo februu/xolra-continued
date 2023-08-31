@@ -20,10 +20,11 @@ Enemy::~Enemy()
 
 void Enemy::update(double deltaTime)
 {
-    // Moves projectile by the same distance every frame in direction given by normalized vector.
+
+    // Moves enemy by the same distance every frame in direction given by normalized vector.
     sf::Vector2f direction = player->getPosition() + sf::Vector2f(20, 20) + game->getCamera()->getOffset() - position;
     direction = normalize(direction);
-    position += sf::Vector2f(direction.x * deltaTime * 100 * speed, direction.y * deltaTime * 100 * speed);
+    position += sf::Vector2f(direction.x * deltaTime * 50 * speed, direction.y * deltaTime * 50 * speed);
 }
 
 void Enemy::draw()
@@ -35,17 +36,17 @@ void Enemy::draw()
     game->getWindow()->draw(shapes);
 
     // Draws health bar.
-    float healthFactor = (float)health / max_health;
-    sf::RectangleShape healthBar(sf::Vector2f(30 * FLOAT_TILESCALE * healthFactor, 6 * FLOAT_TILESCALE));
-    healthBar.setPosition(position.x - FLOAT_TILESCALE * (16 - 1) - FLOAT_TILESCALE * game->getCamera()->getOffset().x, position.y - 20 - FLOAT_TILESCALE * (12 - 1) - FLOAT_TILESCALE * game->getCamera()->getOffset().y);
-    if (healthFactor > 0.66f)
-        healthBar.setFillColor(sf::Color(100, 125, 52, 255));
-    else if (healthFactor > 0.33f)
-        healthBar.setFillColor(sf::Color(228, 148, 58, 255));
-    else
-        healthBar.setFillColor(sf::Color(157, 48, 59, 255));
-    game->getWindow()->draw(healthBar);
-    game->drawSprite(position.x, position.y - 20 - FLOAT_TILESCALE * 12, SPRITE_HUD_HEALTH_BAR, FLOAT_TILESCALE, false, true, true);
+    // float healthFactor = (float)health / max_health;
+    // sf::RectangleShape healthBar(sf::Vector2f(30 * FLOAT_TILESCALE * healthFactor, 6 * FLOAT_TILESCALE));
+    // healthBar.setPosition(position.x - FLOAT_TILESCALE * (16 - 1) - FLOAT_TILESCALE * game->getCamera()->getOffset().x, position.y - 20 - FLOAT_TILESCALE * (12 - 1) - FLOAT_TILESCALE * game->getCamera()->getOffset().y);
+    // if (healthFactor > 0.66f)
+    //     healthBar.setFillColor(sf::Color(100, 125, 52, 255));
+    // else if (healthFactor > 0.33f)
+    //     healthBar.setFillColor(sf::Color(228, 148, 58, 255));
+    // else
+    //     healthBar.setFillColor(sf::Color(157, 48, 59, 255));
+    // game->getWindow()->draw(healthBar);
+    // game->drawSprite(position.x, position.y - 20 - FLOAT_TILESCALE * 12, SPRITE_HUD_HEALTH_BAR, FLOAT_TILESCALE, false, true, true);
 
     // Draws hitbox.
     // sf::RectangleShape hitboxShape(hitbox.getSize());

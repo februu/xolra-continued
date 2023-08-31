@@ -82,10 +82,8 @@ void Player::update(double deltaTime)
     float _changeY = FLOAT_MAX_VELOCITY * resultant.y * deltaTime * 100;
 
     // Calculates new positions for player.
-    rawUnnormalizedPosition.x = rawPosition.x + _changeX;
-    rawUnnormalizedPosition.y = rawPosition.y + _changeY;
-    rawPosition.x = rawPosition.x + _changeX * normalizeVector;
-    rawPosition.y = rawPosition.y + _changeY * normalizeVector;
+    rawPosition.x = clamp(rawPosition.x + _changeX * normalizeVector, 0, 2560 - 50);
+    rawPosition.y = clamp(rawPosition.y + _changeY * normalizeVector, 0, 2140 - 50);
 
     float x = (rawPosition.x - position.x) / 5;
     float y = (rawPosition.y - position.y) / 5;
