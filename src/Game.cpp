@@ -5,16 +5,16 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
-#include "include/Constants.h"
-#include "include/Game.h"
-#include "include/Player.h"
-#include "include/World.h"
-#include "include/Hud.h"
-#include "include/Camera.h"
-#include "include/AssetManager.h"
-#include "include/Sprites.h"
+#include "../include/Constants.h"
+#include "../include/Game.h"
+#include "../include/Player.h"
+#include "../include/World.h"
+#include "../include/Hud.h"
+#include "../include/Camera.h"
+#include "../include/AssetManager.h"
+#include "../include/Sprites.h"
 
-#include "libs/include/discord/discord.h"
+#include "../libs/include/discord/discord.h"
 
 using std::cout;
 
@@ -190,6 +190,8 @@ void Game::drawText(float x, float y, std::string content, int fontId, float sca
         text.setFillColor(sf::Color(0, 0, 0));
         window->draw(text);
     }
+    text.setOutlineColor(sf::Color::White);
+    text.setOutlineThickness(2);
     text.setPosition(sf::Vector2f(x, y));
     text.setFillColor(color);
     window->draw(text);

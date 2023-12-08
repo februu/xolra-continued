@@ -3,8 +3,8 @@
 #include <vector>
 #include <SFML/Graphics.hpp>
 
-#include "include\AssetManager.h"
-#include "include\Sprites.h"
+#include "../include/AssetManager.h"
+#include "../include/Sprites.h"
 
 AssetManager::AssetManager()
 {

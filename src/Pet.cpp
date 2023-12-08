@@ -2,10 +2,10 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
-#include "include/Constants.h"
-#include "include/Pet.h"
-#include "include/Game.h"
-#include "include/Sprites.h"
+#include "../include/Constants.h"
+#include "../include/Pet.h"
+#include "../include/Game.h"
+#include "../include/Sprites.h"
 
 Pet::Pet(Game *game)
 {

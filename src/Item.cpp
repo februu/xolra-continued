@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
-#include "include/Item.h"
-#include "include/Sprites.h"
+#include "../include/Item.h"
+#include "../include/Sprites.h"
 
 Item::Item(int spriteId, int amount, sf::Vector2f position)
 {

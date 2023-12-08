@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include "include/Constants.h"
-#include "include/Math.h"
-#include "include/Camera.h"
-#include "include/Player.h"
+#include "../include/Constants.h"
+#include "../include/Math.h"
+#include "../include/Camera.h"
+#include "../include/Player.h"
 
 Camera::Camera(Player *player)
 {

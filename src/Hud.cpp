@@ -1,9 +1,9 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-#include "include/Hud.h"
-#include "include/Game.h"
-#include "include/Sprites.h"
+#include "../include/Hud.h"
+#include "../include/Game.h"
+#include "../include/Sprites.h"
 
 Hud::Hud(Game *game)
 {

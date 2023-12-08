@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "include/Constants.h"
-#include "include/Enemy.h"
-#include "include/Math.h"
-#include "include/Game.h"
-#include "include/Sprites.h"
+#include "../include/Constants.h"
+#include "../include/Enemy.h"
+#include "../include/Math.h"
+#include "../include/Game.h"
+#include "../include/Sprites.h"
 
 Enemy::Enemy(sf::Vector2f position, Game *game)
 {

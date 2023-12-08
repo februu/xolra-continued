@@ -3,15 +3,15 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-#include "include/Constants.h"
-#include "include/Math.h"
-#include "include/World.h"
-#include "include/Game.h"
-#include "include/Enemy.h"
-#include "include/Camera.h"
-#include "include/Item.h"
-#include "include/Sprites.h"
-#include "include/Projectile.h"
+#include "../include/Constants.h"
+#include "../include/Math.h"
+#include "../include/World.h"
+#include "../include/Game.h"
+#include "../include/Enemy.h"
+#include "../include/Camera.h"
+#include "../include/Item.h"
+#include "../include/Sprites.h"
+#include "../include/Projectile.h"
 
 World::World(Game *game)
 {
@@ -34,17 +34,6 @@ World::World(Game *game)
     heightDistribution = std::uniform_real_distribution<float>(0.f, float(INT_SCREEN_HEIGHT * 2));
 
     // FIXME: =====================
-
-    // World Generation.
-    // srand((unsigned)time(NULL));
-    // for (int x = 0; x < WORLDSIZE; x++)
-    //     for (int y = 0; y < WORLDSIZE; y++)
-    //     {
-    //         if (rand() % 10 == 0)
-    //             tilemap[x][y] = rand() % 7 + 1;
-    //         else
-    //             tilemap[x][y] = 0;
-    //     }
 }
 World::~World()
 {

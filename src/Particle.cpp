@@ -2,10 +2,10 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
-#include "include/Constants.h"
-#include "include/Particle.h"
-#include "include/Game.h"
-#include "include/Sprites.h"
+#include "../include/Constants.h"
+#include "../include/Particle.h"
+#include "../include/Game.h"
+#include "../include/Sprites.h"
 
 TextParticle::TextParticle(sf::Vector2f position, std::string text, sf::Color color, float scale, float maxLifetime, Game *game)
 {

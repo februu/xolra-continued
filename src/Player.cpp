@@ -2,11 +2,11 @@
 #include <algorithm>
 #include <iostream>
 
-#include "include/Constants.h"
-#include "include/Math.h"
-#include "include/Game.h"
-#include "include/Player.h"
-#include "include/Camera.h"
+#include "../include/Constants.h"
+#include "../include/Math.h"
+#include "../include/Game.h"
+#include "../include/Player.h"
+#include "../include/Camera.h"
 
 Player::Player(Game *game)
 {

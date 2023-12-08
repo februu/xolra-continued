@@ -1,0 +1,1 @@
+  -L"C:/Users/lutom/Desktop/GitHub/xolra-continued/libs/lib"  -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lopengl32 -lfreetype -lwinmm -lgdi32 -lsfml-main -ldiscord -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

@@ -1,0 +1,4 @@
+C:/Users/lutom/Desktop/GitHub/xolra-continued/CMakeFiles/Xolra.dir
+C:/Users/lutom/Desktop/GitHub/xolra-continued/CMakeFiles/run.dir
+C:/Users/lutom/Desktop/GitHub/xolra-continued/CMakeFiles/edit_cache.dir
+C:/Users/lutom/Desktop/GitHub/xolra-continued/CMakeFiles/rebuild_cache.dir
